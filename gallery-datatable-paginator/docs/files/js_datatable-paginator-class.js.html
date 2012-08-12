@@ -89,24 +89,51 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
-  Defines a class extension to add capability to support a Paginator View-Model and allow
+  Defines a Y.DataTable class extension to add capability to support a Paginator View-Model and allow
    paging of actively displayed data within the DT instance.
 
   Works with either client-side pagination (i.e. local data, usually in form of JS Array) or
    in conjunction with remote server-side pagination, via either DataSource or ModelSync.REST.
 
-  Allows for dealing with sorted data, wherein the local data is sorted in place, and in the
-   case of remote data the &quot;sortBy&quot; attribute is passed to the remote server.
-    
-	var dtable = new Y.DataTable({
-        	columns:    [ &#x27;firstName&#x27;,&#x27;lastName&#x27;,&#x27;state&#x27;,&#x27;age&#x27;, &#x27;grade&#x27; ],
-        	data:       enrollment.records,
-        	scrollable: &#x27;y&#x27;,
-        	height:     &#x27;450px&#x27;,
-        	paginator:  new PaginatorView({
-         	   	model:  new PaginatorModel({itemsPerPage:50, page:1})
-       		 })
-   	 });
+  Allows for dealing with sorted data, wherein the local data is sorted in place, and in the case of remote data the &quot;sortBy&quot; attribute is passed to the remote server.
+
+ &lt;h4&gt;Usage&lt;&#x2F;h4&gt;
+
+        var dtable = new Y.DataTable({
+            columns:    [ &#x27;firstName&#x27;,&#x27;lastName&#x27;,&#x27;state&#x27;,&#x27;age&#x27;, &#x27;grade&#x27; ],
+            data:       enrollment.records,
+            scrollable: &#x27;y&#x27;,
+            height:     &#x27;450px&#x27;,
+            paginator:  new PaginatorView({
+                model:  new PaginatorModel({itemsPerPage:50, page:1})
+            })
+
+        });
+
+ &lt;h4&gt;Client OR Server Pagination&lt;&#x2F;h4&gt;
+
+ A determination of whether the source of &#x60;data&#x60; is either &quot;local&quot; data (i.e. a Javascript Array or Y.ModelList), or is
+ provided from a server (either DataSource or ModelSync.REST) is made in the method [_bindPaginator](#method__bindPaginator).
+ We use a &quot;duck-type&quot; evaluation, which may not be completely robust, but has worked so far in testing.
+
+ For remote data, the initial call to &#x60;.set(&#x27;data&#x27;,...)&#x60; and&#x2F;or &#x60;data.load(...)&#x60; returns a null array, of zero length, while
+ the request is being retrieved.  We use this fact to discern that it is not &quot;local&quot; data.  Then we evaluate whether the
+ &#x60;datasource&#x60; plugin exists, and if so we assume the source is DataSource, and set &#x60;_pagDataSrc:&#x27;ds&#x27;&#x60;.  Otherwise, if the
+ &#x60;data&#x60; property (i.e. the ModelList) contains an attribute &#x60;totalRecs&#x60; we expect that data will be retrieved via ModelSync.REST
+ and set &#x60;_pagDataSrc:&#x27;mlist&#x27;&#x60;.
+
+ &lt;h4&gt;Loading the &#x60;data&#x60; For a Page&lt;&#x2F;h4&gt;
+ Once the &quot;source of data&quot; is known, the method [processPageRequest](#method_processPageRequest) fires on a &#x60;pageChange&#x60;.
+
+ For the case of &quot;local data&quot;, i.e. where &#x60;_pagDataSrc:&#x27;local&#x27;&#x60;, the existing buffer of data is sliced according to the pagination
+ state, and the data is loaded silently, and &#x60;this.syncUI()&#x60; is fired to refresh the DT.
+
+ The case of &quot;remote data&quot; (from a server) is actually more straightforward.  This extension DOES NOT &quot;cache&quot; pages for remote
+ data, it simply inserts the full returned data into the DT.  So as a consequence, a pagination state change for remote data
+ involves a simple request sent to the server source (either DataSource or ModelSync.REST) and the response results are
+ loaded in the DT.
+
+
 
   @module datatable
   @class Y.DataTable.Paginator
@@ -173,6 +200,17 @@ Y.mix( DtPaginator.prototype, {
     _pagDataSrc: null,
 
 
+    &#x2F;**
+     * A convenience property (which is identical to the attribute &#x60;paginator&#x60;) for use by the user.
+     *
+     * @property paginator
+     * @type {Y.PaginatorView|View}
+     * @default null
+     * @public
+     * @since 3.6.0
+     *&#x2F;
+    paginator: null,
+
 &#x2F;*----------------------------------------------------------------------------------------------------------*&#x2F;
 &#x2F;*                  L I F E - C Y C L E    M E T H O D S                                                    *&#x2F;
 &#x2F;*----------------------------------------------------------------------------------------------------------*&#x2F;
@@ -194,12 +232,14 @@ Y.mix( DtPaginator.prototype, {
         this._eventHandles.paginator.push( Y.Do.after( this._bindPaginator, this, &#x27;_bindUI&#x27;, this) );
         this._eventHandles.paginator.push( this.get(&#x27;data&#x27;).after([&quot;load&quot;,&quot;change&quot;,&quot;reset&quot;,&quot;add&quot;,&quot;remove&quot;], Y.bind(this._bindPaginator,this)) );
 
-       &#x2F;&#x2F; had to do this, specifically for DataSource ... (no better way?)
+       &#x2F;&#x2F;
+       &#x2F;&#x2F; Had to do this, specifically for DataSource ... (no better way?)
        &#x2F;&#x2F;   since DataSource is a plugin, it may not be plugged when DT instantiates,
        &#x2F;&#x2F;   so this captures the .set(&#x27;data&#x27;,...) event, and redirects to _bindPaginator
+       &#x2F;&#x2F;
         this._eventHandles.paginator.push( Y.Do.after( this._afterSetData, this, &#x27;_setData&#x27;, this) );
 
-       &#x2F;&#x2F; hacky .. but works
+       &#x2F;&#x2F; Try to determine when DT is finished rendering records, this is hacky .. but seems to work
         this._eventHandles.paginator.push( this.after( &#x27;renderView&#x27;, this._notifyRender) );
 
         return this
@@ -229,7 +269,7 @@ Y.mix( DtPaginator.prototype, {
      *  when a new &#x27;data&#x27; is set, untested.
      *
      * @method dataReset
-     * @param {Array|ModelList} data Data to be reset to
+     * @param {Array|ModelList} data Data to be reset to ... either as a JS Array or a Y.ModelList
      * @public
      * @returns nothing
      * @beta
@@ -251,11 +291,13 @@ Y.mix( DtPaginator.prototype, {
      *   and returns a new subset of data for the DT
      *   or sends a new request to a remote source to populate the DT
      *
-     * @method processPageRequest
-     * @param  {Integer} page_no Current page number to change to
-     * @param  {Object} pag_state Pagination state object, includes &#x60;{indexStart:, numRecs:, sortBy: }&#x60;
-     * @public
-     * @returns nothing
+     *  @method processPageRequest
+     *  @param  {Integer} page_no Current page number to change to
+     *  @param  {Object} pag_state Pagination state object (this is NOT populated in local .. non-server type pagination) including;
+     *      @param {Integer} pag_state.indexStart Starting index returned from server response
+     *      @param {Integer} pag_state.numRecs Count of records returned from the response
+     *  @public
+     *  @returns nothing
      *&#x2F;
     processPageRequest: function(page_no, pag_state) {
         var rdata = this._mlistArray,
@@ -329,26 +371,6 @@ Y.mix( DtPaginator.prototype, {
 &#x2F;*----------------------------------------------------------------------------------------------------------*&#x2F;
 &#x2F;*                  P R I V A T E    M E T H O D S                                                          *&#x2F;
 &#x2F;*----------------------------------------------------------------------------------------------------------*&#x2F;
-
-    &#x2F;**
-     *
-     * @method _notifyRender
-     * @private
-     *&#x2F;
-    _notifyRender: function() {
-        this.fire(&#x27;render&#x27;);
-    },
-
-    &#x2F;**
-     * @method _afterSetData
-     * @param e
-     * @private
-     *&#x2F;
-    _afterSetData:  function(e){
-        &#x2F;&#x2F;console.log(&#x27;aftersetdata ... data.size=&#x27; + this.data.size() );
-        if ( this.data.size &amp;&amp; this.data.size()&gt;0 )
-            this._bindPaginator();
-    },
 
     &#x2F;**
      * Listener hooked to the original DT&#x27;s &quot;syncUI&quot; event, only stores the ModelList for
@@ -442,12 +464,11 @@ Y.mix( DtPaginator.prototype, {
     },
 
     &#x2F;**
-     * Listener that fires when the Mode&#x27;s &#x27;pageChange&#x27; fires, this
-     *  extracts the current page from the state object and then
+     * Listener that fires when the Model&#x27;s &#x27;pageChange&#x27; fires, this extracts the current page from the state object and then
      *  hooks up the processPageRequest method.
      *
      * @method _pageListener
-     * @param o
+     * @param {Object} o which contains a &#x60;state&#x60; object containing the &#x60;Model.getAttrs()&#x60; attributes
      * @private
      *&#x2F;
     _pageListener: function(o){
@@ -457,11 +478,11 @@ Y.mix( DtPaginator.prototype, {
     },
 
     &#x2F;**
-     * This is a setter for the &#x27;paginator&#x27; attribute,
-     *   might not be necessary ..
+     * This is a setter for the &#x27;paginator&#x27; attribute, primarily to set the public property &#x60;paginator&#x60; to the
+     * attribute value.
      *
      * @method _setPaginator
-     * @param val
+     * @param {PaginatorView|View} val The PaginatorView instance to set
      * @return {*}
      * @private
      *&#x2F;
@@ -469,8 +490,32 @@ Y.mix( DtPaginator.prototype, {
         if ( !val ) return;
         this.paginator = val;
         return val;
-    }
+    },
 
+    &#x2F;**
+     * A method that fires after the DataTable &#x60;renderView&#x60; method completes, that is *approximately* when
+     * the DataTable has finished rendering.
+     *
+     * @method _notifyRender
+     * @private
+     *&#x2F;
+    _notifyRender: function() {
+        this.fire(&#x27;render&#x27;);
+    },
+
+    &#x2F;**
+     * A connector method that will re-bind the Paginator instance to this DataTable after an underlying
+     * change to &quot;data&quot; (via &#x60;*:change&#x60;, &#x60;*:reset&#x60;, &#x60;*:add&#x60;, &#x60;*:remove&#x60; events)
+     *
+     * @method _afterSetData
+     * @param {EventFacade} e
+     * @private
+     *&#x2F;
+    _afterSetData:  function(e){
+        &#x2F;&#x2F;console.log(&#x27;aftersetdata ... data.size=&#x27; + this.data.size() );
+        if ( this.data.size &amp;&amp; this.data.size()&gt;0 )
+            this._bindPaginator();
+    }
 
     &#x2F;**
      * Fires after the DataTable &#x27;renderView&#x27; event fires
@@ -480,17 +525,17 @@ Y.mix( DtPaginator.prototype, {
     &#x2F;**
      * Fires after the DataTable-Paginator updates the page data and&#x2F;or sends the remote request for more data
      * @event pageupdate
-     * @param {Object} containing following;
-     * @param {Object} pag_state Of Paginator Model &#x60;getAttrs()&#x60; as an Object
-     * @param {View} view Instance of the Paginator View
+     * @param {Object} pagStatus containing following;
+     *  @param {Object} pagStatus.pag_state Of Paginator Model &#x60;getAttrs()&#x60; as an Object
+     *  @param {View} pagStatus.view Instance of the Paginator View
      *&#x2F;
 
     &#x2F;**
      * Fires after the DataTable-Paginator has setup properly, rendered the View and is ready to accept page changes
      * @event paginatorSetup
-     * @param {Object} containing following;
-     * @param {Model} model Instance of Paginator Model
-     * @param {View} view Instance of the Paginator View
+     * @param {Object} pagObj Containing following;
+     *  @param {Model} pagObj.model Instance of Paginator Model
+     *  @param {View} pagObj.view Instance of the Paginator View
      *&#x2F;
 
 });

@@ -4,14 +4,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Y.PaginatorModel",
         "Y.PaginatorView"
     ],
-    "modules": [
-        "paginator-view"
-    ],
-    "allModules": [
-        {
-            "displayName": "paginator-view",
-            "name": "paginator-view"
-        }
-    ]
+    "modules": [],
+    "allModules": []
 } };
 });

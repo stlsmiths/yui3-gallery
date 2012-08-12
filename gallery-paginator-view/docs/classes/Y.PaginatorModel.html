@@ -49,8 +49,6 @@
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/paginator-view.html">paginator-view</a></li>
-            
             </ul>
         </div>
     </div>
@@ -98,14 +96,10 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l9"><code>js&#x2F;paginator-view.js:9</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l1"><code>js&#x2F;paginator-view.js:1</code></a>
         </div>
     
 
-    
-        
-            Module: <a href="../modules/paginator-view.html">paginator-view</a>
-        
     
 
     
@@ -116,7 +110,7 @@
 
 
 <div class="box intro">
-    <p>A Model infrastructure element to be used to track pagination state of a paged set of control elements.
+    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
 For example, can be used to track the pagination status of a DataTable where the user selects limited
 portions for display, against a larger data set.</p>
 
@@ -125,12 +119,12 @@ portions for display, against a larger data set.</p>
     <br/>&nbsp;&nbsp;&nbsp;   <code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )
     <br/>&nbsp;&nbsp;&nbsp;   <code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes (See attribute <a href="#attr_page">page</a> )</p>
 
-<p>Example;</p>
+<h4>Usage</h4>
 
 <pre class="code"><code class="prettyprint">   // setup a paginator model for 500 'foo' items, paged at 50 per page ...
    var pagModel = new Y.PaginatorModel({
        totalItems:     500,
-      itemsPerPage:   50
+       itemsPerPage:   50
    });
    pagModel.get('totalPages');  // returns 10
 
@@ -155,6 +149,8 @@ portions for display, against a larger data set.</p>
         
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
         
+        
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
         
     </ul>
 
@@ -277,6 +273,49 @@ portions for display, against a larger data set.</p>
             
 
             
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                        
+                            <li class="index-item event">
+                                <a href="#event_itemsPerPageChange">itemsPerPageChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_lastPageChange">lastPageChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_pageChange">pageChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_totalItemsChange">totalItemsChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_totalPagesChange">totalPagesChange</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
         </div>
 
         
@@ -332,7 +371,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l92"><code>js&#x2F;paginator-view.js:92</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l83"><code>js&#x2F;paginator-view.js:83</code></a>
         
         </p>
 
@@ -358,7 +397,7 @@ portions for display, against a larger data set.</p>
                 <li class="param">
                     
                         <code class="param-name">e</code>
-                        <span class="type">EventHandle</span>
+                        <span class="type">EventFacade</span>
                     
 
                     
@@ -429,7 +468,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l151"><code>js&#x2F;paginator-view.js:151</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l142"><code>js&#x2F;paginator-view.js:142</code></a>
         
         </p>
 
@@ -502,7 +541,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l141"><code>js&#x2F;paginator-view.js:141</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l132"><code>js&#x2F;paginator-view.js:132</code></a>
         
         </p>
 
@@ -575,7 +614,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l116"><code>js&#x2F;paginator-view.js:116</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l107"><code>js&#x2F;paginator-view.js:107</code></a>
         
         </p>
 
@@ -647,7 +686,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l79"><code>js&#x2F;paginator-view.js:79</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l70"><code>js&#x2F;paginator-view.js:70</code></a>
         
         </p>
 
@@ -707,7 +746,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l58"><code>js&#x2F;paginator-view.js:58</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l49"><code>js&#x2F;paginator-view.js:49</code></a>
         
         </p>
 
@@ -774,7 +813,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l40"><code>js&#x2F;paginator-view.js:40</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l31"><code>js&#x2F;paginator-view.js:31</code></a>
         
         </p>
 
@@ -820,7 +859,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l49"><code>js&#x2F;paginator-view.js:49</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l40"><code>js&#x2F;paginator-view.js:40</code></a>
         
         </p>
 
@@ -877,7 +916,7 @@ portions for display, against a larger data set.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l250"><code>js&#x2F;paginator-view.js:250</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l267"><code>js&#x2F;paginator-view.js:267</code></a>
         
         </p>
 
@@ -931,7 +970,7 @@ should not be "set" by the user, as it will be disregarded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l234"><code>js&#x2F;paginator-view.js:234</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l251"><code>js&#x2F;paginator-view.js:251</code></a>
         
         </p>
 
@@ -985,7 +1024,7 @@ should not be "set" by the user, as it will be disregarded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l178"><code>js&#x2F;paginator-view.js:178</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l195"><code>js&#x2F;paginator-view.js:195</code></a>
         
         </p>
 
@@ -1036,7 +1075,7 @@ should not be "set" by the user, as it will be disregarded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l205"><code>js&#x2F;paginator-view.js:205</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l222"><code>js&#x2F;paginator-view.js:222</code></a>
         
         </p>
 
@@ -1087,7 +1126,7 @@ should not be "set" by the user, as it will be disregarded.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l190"><code>js&#x2F;paginator-view.js:190</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l207"><code>js&#x2F;paginator-view.js:207</code></a>
         
         </p>
 
@@ -1141,7 +1180,7 @@ with the Paginator Model.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l166"><code>js&#x2F;paginator-view.js:166</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l183"><code>js&#x2F;paginator-view.js:183</code></a>
         
         </p>
 
@@ -1192,7 +1231,7 @@ with the Paginator Model.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l217"><code>js&#x2F;paginator-view.js:217</code></a>
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l234"><code>js&#x2F;paginator-view.js:234</code></a>
         
         </p>
 
@@ -1222,6 +1261,342 @@ shouldn't be set by the user.</p>
             </div>
         
 
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_itemsPerPageChange" class="events item">
+    <h3 class="name"><code>itemsPerPageChange</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l159"><code>js&#x2F;paginator-view.js:159</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires after the <code>itemsPerPage</code> attribute is changed</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_lastPageChange" class="events item">
+    <h3 class="name"><code>lastPageChange</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l174"><code>js&#x2F;paginator-view.js:174</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires after the <code>lastPage</code> attribute is changed</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_pageChange" class="events item">
+    <h3 class="name"><code>pageChange</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l154"><code>js&#x2F;paginator-view.js:154</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires after the <code>page</code> attribute is changed</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_totalItemsChange" class="events item">
+    <h3 class="name"><code>totalItemsChange</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l164"><code>js&#x2F;paginator-view.js:164</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires after the <code>totalItems</code> attribute is changed</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_totalPagesChange" class="events item">
+    <h3 class="name"><code>totalPagesChange</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_paginator-view.js.html#l169"><code>js&#x2F;paginator-view.js:169</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fires after the <code>totalPages</code> attribute is changed</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+            </div>
         
     </div>
 </div>

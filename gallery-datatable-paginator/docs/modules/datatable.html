@@ -104,25 +104,50 @@
 
 
 <div class="box intro">
-    <p>Defines a class extension to add capability to support a Paginator View-Model and allow
+    <p>Defines a Y.DataTable class extension to add capability to support a Paginator View-Model and allow
  paging of actively displayed data within the DT instance.</p>
 
 <p>Works with either client-side pagination (i.e. local data, usually in form of JS Array) or
  in conjunction with remote server-side pagination, via either DataSource or ModelSync.REST.</p>
 
-<p>Allows for dealing with sorted data, wherein the local data is sorted in place, and in the
- case of remote data the "sortBy" attribute is passed to the remote server.</p>
+<p>Allows for dealing with sorted data, wherein the local data is sorted in place, and in the case of remote data the "sortBy" attribute is passed to the remote server.</p>
 
-<pre class="code"><code class="prettyprint">var dtable = new Y.DataTable({
+<p><h4>Usage</h4></p>
+
+<pre class="code"><code class="prettyprint">  var dtable = new Y.DataTable({
       columns:    [ 'firstName','lastName','state','age', 'grade' ],
       data:       enrollment.records,
       scrollable: 'y',
       height:     '450px',
       paginator:  new PaginatorView({
-           model:  new PaginatorModel({itemsPerPage:50, page:1})
-          })
+      model:  new PaginatorModel({itemsPerPage:50, page:1})
+      })
+
   });
 </code></pre>
+
+<p><h4>Client OR Server Pagination</h4></p>
+
+<p>A determination of whether the source of <code>data</code> is either "local" data (i.e. a Javascript Array or Y.ModelList), or is
+ provided from a server (either DataSource or ModelSync.REST) is made in the method <a href="#method__bindPaginator">_bindPaginator</a>.
+ We use a "duck-type" evaluation, which may not be completely robust, but has worked so far in testing.</p>
+
+<p>For remote data, the initial call to <code>.set('data',...)</code> and/or <code>data.load(...)</code> returns a null array, of zero length, while
+ the request is being retrieved.  We use this fact to discern that it is not "local" data.  Then we evaluate whether the
+ <code>datasource</code> plugin exists, and if so we assume the source is DataSource, and set <code>_pagDataSrc:'ds'</code>.  Otherwise, if the
+ <code>data</code> property (i.e. the ModelList) contains an attribute <code>totalRecs</code> we expect that data will be retrieved via ModelSync.REST
+ and set <code>_pagDataSrc:'mlist'</code>.</p>
+
+<p><h4>Loading the <code>data</code> For a Page</h4>
+ Once the "source of data" is known, the method <a href="#method_processPageRequest">processPageRequest</a> fires on a <code>pageChange</code>.</p>
+
+<p>For the case of "local data", i.e. where <code>_pagDataSrc:'local'</code>, the existing buffer of data is sliced according to the pagination
+ state, and the data is loaded silently, and <code>this.syncUI()</code> is fired to refresh the DT.</p>
+
+<p>The case of "remote data" (from a server) is actually more straightforward.  This extension DOES NOT "cache" pages for remote
+ data, it simply inserts the full returned data into the DT.  So as a consequence, a pagination state change for remote data
+ involves a simple request sent to the server source (either DataSource or ModelSync.REST) and the response results are
+ loaded in the DT.</p>
 </div>
 
 
