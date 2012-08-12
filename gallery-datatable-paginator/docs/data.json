@@ -1,0 +1,310 @@
+{
+    "project": {},
+    "files": {
+        "js/datatable-paginator-class.js": {
+            "name": "js/datatable-paginator-class.js",
+            "modules": {
+                "datatable": 1
+            },
+            "classes": {
+                "Y.DataTable.Paginator": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "datatable": {
+            "name": "datatable",
+            "submodules": {},
+            "classes": {
+                "Y.DataTable.Paginator": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/datatable-paginator-class.js",
+            "line": 1,
+            "description": "Defines a class extension to add capability to support a Paginator View-Model and allow\n paging of actively displayed data within the DT instance.\n\nWorks with either client-side pagination (i.e. local data, usually in form of JS Array) or\n in conjunction with remote server-side pagination, via either DataSource or ModelSync.REST.\n\nAllows for dealing with sorted data, wherein the local data is sorted in place, and in the\n case of remote data the \"sortBy\" attribute is passed to the remote server.\n  \n\tvar dtable = new Y.DataTable({\n      \tcolumns:    [ 'firstName','lastName','state','age', 'grade' ],\n      \tdata:       enrollment.records,\n      \tscrollable: 'y',\n      \theight:     '450px',\n      \tpaginator:  new PaginatorView({\n       \t   \tmodel:  new PaginatorModel({itemsPerPage:50, page:1})\n     \t\t })\n \t });",
+            "extends": "Y.DataTable",
+            "version": "1.0.1",
+            "since": "3.6.0",
+            "author": "Todd Smith"
+        }
+    },
+    "classes": {
+        "Y.DataTable.Paginator": {
+            "name": "Y.DataTable.Paginator",
+            "shortname": "Y.DataTable.Paginator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "DataTable"
+            ],
+            "module": "datatable",
+            "namespace": "",
+            "file": "js/datatable-paginator-class.js",
+            "line": 1,
+            "description": "Defines a class extension to add capability to support a Paginator View-Model and allow\n paging of actively displayed data within the DT instance.\n\nWorks with either client-side pagination (i.e. local data, usually in form of JS Array) or\n in conjunction with remote server-side pagination, via either DataSource or ModelSync.REST.\n\nAllows for dealing with sorted data, wherein the local data is sorted in place, and in the\n case of remote data the \"sortBy\" attribute is passed to the remote server.\n  \n\tvar dtable = new Y.DataTable({\n      \tcolumns:    [ 'firstName','lastName','state','age', 'grade' ],\n      \tdata:       enrollment.records,\n      \tscrollable: 'y',\n      \theight:     '450px',\n      \tpaginator:  new PaginatorView({\n       \t   \tmodel:  new PaginatorModel({itemsPerPage:50, page:1})\n     \t\t })\n \t });"
+        }
+    },
+    "classitems": [
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 35,
+            "description": "Adds a paginator view (specifically, Y.PaginatorView) instance to the DataTable.",
+            "itemtype": "attribute",
+            "name": "paginator",
+            "type": "Y.View",
+            "default": "null",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 50,
+            "description": "Holder for the \"original\" un-paged data that the DataTable was based upon.\n\nThis property is stored as an Array, from the original \"data\" ModelList.\nFor remote data, it is used as-is.\nFor local data, is sliced as needed to re-set each data Page.\n\nPopulated in _bindPaginator and utilized in processPageRequest",
+            "itemtype": "property",
+            "name": "_mlistArray",
+            "type": "Array",
+            "default": "null",
+            "static": 1,
+            "since": "3.6.0",
+            "access": "protected",
+            "tagname": "",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 69,
+            "description": "Placeholder for a text flag indicating the duck-typed source of data for this\n DataTable, this is set in `_bindPaginator` to either of 'ds', 'mlist' or 'local'\n\n Populated in _bindPaginator\n Utilized in processPageRequest",
+            "itemtype": "property",
+            "name": "_pagDataSrc",
+            "type": "String",
+            "default": "null",
+            "static": 1,
+            "since": "3.6.0",
+            "access": "protected",
+            "tagname": "",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 90,
+            "description": "This initializer sets up the listeners related to the original DataTable instance and\n also related to the underlying \"data\" attribute the DT is based upon.",
+            "itemtype": "method",
+            "name": "initializer",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "this"
+            },
+            "chainable": 1,
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 118,
+            "description": "Destructor to clean up listener event handlers and the internal storage buffer.",
+            "itemtype": "method",
+            "name": "destructor",
+            "access": "public",
+            "tagname": "",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 137,
+            "description": "Method to re-initialize the original data, mostly targeted at local data\n when a new 'data' is set, untested.",
+            "itemtype": "method",
+            "name": "dataReset",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Data to be reset to",
+                    "type": "Array|ModelList"
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "nothing"
+            },
+            "beta": 1,
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 159,
+            "description": "Primary workhorse method that is fired when the Paginator \"page\" changes,\n  and returns a new subset of data for the DT\n  or sends a new request to a remote source to populate the DT",
+            "itemtype": "method",
+            "name": "processPageRequest",
+            "params": [
+                {
+                    "name": "page_no",
+                    "description": "Current page number to change to",
+                    "type": "Integer"
+                },
+                {
+                    "name": "pag_state",
+                    "description": "Pagination state object, includes `{indexStart:, numRecs:, sortBy: }`",
+                    "type": "Object"
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "nothing"
+            },
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 243,
+            "itemtype": "method",
+            "name": "_notifyRender",
+            "access": "private",
+            "tagname": "",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 252,
+            "itemtype": "method",
+            "name": "_afterSetData",
+            "params": [
+                {
+                    "name": "e",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 263,
+            "description": "Listener hooked to the original DT's \"syncUI\" event, only stores the ModelList for\n the DT on the first pass through.\n\n For server-generated data, this method determines the server type (DataSource or ModelSync.REST)\n  and sets the property flag _pagDataSrc to either 'ds' or 'mlist'",
+            "itemtype": "method",
+            "name": "_bindPaginator",
+            "since": "3.6.0",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "true or false"
+            },
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 354,
+            "description": "Listener that fires when the Mode's 'pageChange' fires, this\n extracts the current page from the state object and then\n hooks up the processPageRequest method.",
+            "itemtype": "method",
+            "name": "_pageListener",
+            "params": [
+                {
+                    "name": "o",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 369,
+            "description": "This is a setter for the 'paginator' attribute,\n  might not be necessary ..",
+            "itemtype": "method",
+            "name": "_setPaginator",
+            "params": [
+                {
+                    "name": "val",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 385,
+            "description": "Fires after the DataTable 'renderView' event fires",
+            "itemtype": "event",
+            "name": "render",
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 390,
+            "description": "Fires after the DataTable-Paginator updates the page data and/or sends the remote request for more data",
+            "itemtype": "event",
+            "name": "pageupdate",
+            "params": [
+                {
+                    "name": "containing",
+                    "description": "following;",
+                    "type": "Object"
+                },
+                {
+                    "name": "pag_state",
+                    "description": "Of Paginator Model `getAttrs()` as an Object",
+                    "type": "Object"
+                },
+                {
+                    "name": "view",
+                    "description": "Instance of the Paginator View",
+                    "type": "View"
+                }
+            ],
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        },
+        {
+            "file": "js/datatable-paginator-class.js",
+            "line": 398,
+            "description": "Fires after the DataTable-Paginator has setup properly, rendered the View and is ready to accept page changes",
+            "itemtype": "event",
+            "name": "paginatorSetup",
+            "params": [
+                {
+                    "name": "containing",
+                    "description": "following;",
+                    "type": "Object"
+                },
+                {
+                    "name": "model",
+                    "description": "Instance of Paginator Model",
+                    "type": "Model"
+                },
+                {
+                    "name": "view",
+                    "description": "Instance of the Paginator View",
+                    "type": "View"
+                }
+            ],
+            "class": "Y.DataTable.Paginator",
+            "module": "datatable"
+        }
+    ]
+}
