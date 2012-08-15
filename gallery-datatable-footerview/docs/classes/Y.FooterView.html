@@ -208,6 +208,8 @@ dtable.render('#salesDT');
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
         
     </ul>
 
@@ -370,6 +372,62 @@ dtable.render('#salesDT');
                 </div>
             
 
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_columns">columns</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_columns.className">columns.className</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_columns.content">columns.content</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_columns.formatter">columns.formatter</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_columns.key">columns.key</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_dateFormat">dateFormat</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_fixed">fixed</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_heading">heading</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_heading.className">heading.className</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_heading.colspan">heading.colspan</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_heading.content">heading.content</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_timeFormat">timeFormat</a>
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -1568,6 +1626,642 @@ remaining elements are the TD's for each requested footer field.</p>
             </div>
         
 
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_columns" class="attr item">
+    <a name="config_columns"></a> 
+    <h3 class="name"><code>columns</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l725"><code>js&#x2F;dt_footerview.js:725</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>An array of objects, one row per <em>desired</em> column of TD representing a summary from the dataset.</p>
+
+<p>Only TD's with a row included in this array will be processed and rendered, otherwise any visible
+ columns from the DataTable, that are not within a TH colspan, will be created as empty.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_columns.className" class="attr item">
+    <a name="config_columns.className"></a> 
+    <h3 class="name"><code>columns.className</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l755"><code>js&#x2F;dt_footerview.js:755</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A CSS class name to be added to this TD element of the footer</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_columns.content" class="attr item">
+    <a name="config_columns.content"></a> 
+    <h3 class="name"><code>columns.content</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l742"><code>js&#x2F;dt_footerview.js:742</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A string template defining the contents of this TD column in the footer.  May include any set-based (i.e. <code>{sum}</code>,<code>{min}</code>,<code>{max}</code>,<code>{avg}</code>) or non-set related fields, including <code>{row_count}</code>, <code>{col_count}</code>, <code>{date}</code>,<code>{time}</code>.
+<br/>The {average} and {mean} placeholders are equivalent to {avg} in this implementation.</p>
+
+<p>Example:</p>
+
+<pre class="code"><code class="prettyprint">columns[2].content : '{sum}'
+</code></pre>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_columns.formatter" class="attr item">
+    <a name="config_columns.formatter"></a> 
+    <h3 class="name"><code>columns.formatter</code></h3>
+    <span class="type">String | Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l763"><code>js&#x2F;dt_footerview.js:763</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies a formatter to apply to the numeric field denoted in this TD column.  A formatter from the original DataTable columns can be specified.</p>
+
+<p>If this attribute is set to null (or missing), the formatter from the DataTable column associated with the "key" (if any), will be used.</p>
+
+<p>If this attribute is set to '', no formatting will be applied.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_columns.key" class="attr item">
+    <a name="config_columns.key"></a> 
+    <h3 class="name"><code>columns.key</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l735"><code>js&#x2F;dt_footerview.js:735</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The dataset "key" corresponding to the columns of the DataTable for this desired TD in the footer.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_dateFormat" class="attr item">
+    <a name="config_dateFormat"></a> 
+    <h3 class="name"><code>dateFormat</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l775"><code>js&#x2F;dt_footerview.js:775</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies a strftime format string to be applied for {date} entries, using Y.DataType.Date.format</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;%D&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_fixed" class="attr item">
+    <a name="config_fixed"></a> 
+    <h3 class="name"><code>fixed</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l685"><code>js&#x2F;dt_footerview.js:685</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Flag indicating if the footer is desired to be "fixed" (i.e. non-scrolling, true) or floating with Datatable scrolling (false)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_heading" class="attr item">
+    <a name="config_heading"></a> 
+    <h3 class="name"><code>heading</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l692"><code>js&#x2F;dt_footerview.js:692</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the TH properties for the footer row, the leftmost column (including optional colspan)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_heading.className" class="attr item">
+    <a name="config_heading.className"></a> 
+    <h3 class="name"><code>heading.className</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l718"><code>js&#x2F;dt_footerview.js:718</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A CSS class name to be added to the TH element of the footer</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_heading.colspan" class="attr item">
+    <a name="config_heading.colspan"></a> 
+    <h3 class="name"><code>heading.colspan</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l711"><code>js&#x2F;dt_footerview.js:711</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The number of columns from the DataTable columns that should be spanned for the TH in the footer</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> 1</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_heading.content" class="attr item">
+    <a name="config_heading.content"></a> 
+    <h3 class="name"><code>heading.content</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l699"><code>js&#x2F;dt_footerview.js:699</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A string template defining the contents of the TH column.  May include any non-set related fields, including <code>{row_count}</code>, <code>{col_count}</code>, <code>{date}</code>,<code>{time}</code></p>
+
+<p>Example:</p>
+
+<pre class="code"><code class="prettyprint">heading.content : 'Totals for {row_count} Orders as-of {date} :'
+</code></pre>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_timeFormat" class="attr item">
+    <a name="config_timeFormat"></a> 
+    <h3 class="name"><code>timeFormat</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_dt_footerview.js.html#l782"><code>js&#x2F;dt_footerview.js:782</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies a strftime format string to be applied for {time} entries, using Y.DataType.Date.format</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;%T&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

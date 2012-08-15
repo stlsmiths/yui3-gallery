@@ -314,6 +314,138 @@
             "tagname": "",
             "class": "Y.FooterView",
             "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 685,
+            "description": "Flag indicating if the footer is desired to be \"fixed\" (i.e. non-scrolling, true) or floating with Datatable scrolling (false)",
+            "itemtype": "attribute",
+            "name": "fixed",
+            "type": "boolean",
+            "default": "false",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 692,
+            "description": "Defines the TH properties for the footer row, the leftmost column (including optional colspan)",
+            "itemtype": "attribute",
+            "name": "heading",
+            "type": "Object",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 699,
+            "description": "A string template defining the contents of the TH column.  May include any non-set related fields, including `{row_count}`, `{col_count}`, `{date}`,`{time}`\n\nExample:\n\n    heading.content : 'Totals for {row_count} Orders as-of {date} :'",
+            "itemtype": "attribute",
+            "name": "heading.content",
+            "type": "String",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 711,
+            "description": "The number of columns from the DataTable columns that should be spanned for the TH in the footer",
+            "itemtype": "attribute",
+            "name": "heading.colspan",
+            "type": "Integer",
+            "default": "1",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 718,
+            "description": "A CSS class name to be added to the TH element of the footer",
+            "itemtype": "attribute",
+            "name": "heading.className",
+            "type": "String",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 725,
+            "description": "An array of objects, one row per *desired* column of TD representing a summary from the dataset.\n\nOnly TD's with a row included in this array will be processed and rendered, otherwise any visible\n columns from the DataTable, that are not within a TH colspan, will be created as empty.",
+            "itemtype": "attribute",
+            "name": "columns",
+            "type": "Array",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 735,
+            "description": "The dataset \"key\" corresponding to the columns of the DataTable for this desired TD in the footer.",
+            "itemtype": "attribute",
+            "name": "columns.key",
+            "type": "String",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 742,
+            "description": "A string template defining the contents of this TD column in the footer.  May include any set-based (i.e. `{sum}`,`{min}`,`{max}`,`{avg}`) or non-set related fields, including `{row_count}`, `{col_count}`, `{date}`,`{time}`.\n<br/>The {average} and {mean} placeholders are equivalent to {avg} in this implementation.\n\nExample:\n\n    columns[2].content : '{sum}'",
+            "itemtype": "attribute",
+            "name": "columns.content",
+            "type": "String",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 755,
+            "description": "A CSS class name to be added to this TD element of the footer",
+            "itemtype": "attribute",
+            "name": "columns.className",
+            "type": "String",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 763,
+            "description": "Specifies a formatter to apply to the numeric field denoted in this TD column.  A formatter from the original DataTable columns can be specified.\n\nIf this attribute is set to null (or missing), the formatter from the DataTable column associated with the \"key\" (if any), will be used.\n\nIf this attribute is set to '', no formatting will be applied.",
+            "itemtype": "attribute",
+            "name": "columns.formatter",
+            "type": "{String|Function}",
+            "default": "null",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 775,
+            "description": "Specifies a strftime format string to be applied for {date} entries, using Y.DataType.Date.format",
+            "itemtype": "attribute",
+            "name": "dateFormat",
+            "type": "String",
+            "default": "\"%D\"",
+            "class": "Y.FooterView",
+            "module": "FooterView"
+        },
+        {
+            "file": "js/dt_footerview.js",
+            "line": 782,
+            "description": "Specifies a strftime format string to be applied for {time} entries, using Y.DataType.Date.format",
+            "itemtype": "attribute",
+            "name": "timeFormat",
+            "type": "String",
+            "default": "\"%T\"",
+            "class": "Y.FooterView",
+            "module": "FooterView"
         }
     ]
 }

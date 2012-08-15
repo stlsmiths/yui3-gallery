@@ -770,7 +770,115 @@
 
       }
 
+&#x2F;&#x2F; --------------- PSEUDO-ATTRIBUTES ... i.e. attributes expected, but in DataTable&#x27;s footerConfig ------------------
+
+    &#x2F;**
+    Flag indicating if the footer is desired to be &quot;fixed&quot; (i.e. non-scrolling, true) or floating with Datatable scrolling (false)
+    @attribute fixed
+    @type boolean
+    @default false
+    **&#x2F;
+
+    &#x2F;**
+    Defines the TH properties for the footer row, the leftmost column (including optional colspan)
+    @attribute heading
+    @type Object
+    @default null
+    **&#x2F;
+
+    &#x2F;**
+    A string template defining the contents of the TH column.  May include any non-set related fields, including &#x60;{row_count}&#x60;, &#x60;{col_count}&#x60;, &#x60;{date}&#x60;,&#x60;{time}&#x60;
+
+    Example:
+
+        heading.content : &#x27;Totals for {row_count} Orders as-of {date} :&#x27;
+
+    @attribute heading.content
+    @type String
+    @default null
+    **&#x2F;
+
+    &#x2F;**
+    The number of columns from the DataTable columns that should be spanned for the TH in the footer
+    @attribute heading.colspan
+    @type Integer
+    @default 1
+    **&#x2F;
+
+    &#x2F;**
+    A CSS class name to be added to the TH element of the footer
+    @attribute heading.className
+    @type String
+    @default null
+    **&#x2F;
+
+    &#x2F;**
+    An array of objects, one row per *desired* column of TD representing a summary from the dataset.
+
+    Only TD&#x27;s with a row included in this array will be processed and rendered, otherwise any visible
+     columns from the DataTable, that are not within a TH colspan, will be created as empty.
+    @attribute columns
+    @type Array
+    @default null
+    **&#x2F;
+
+    &#x2F;**
+    The dataset &quot;key&quot; corresponding to the columns of the DataTable for this desired TD in the footer.
+    @attribute columns.key
+    @type String
+    @default null
+    **&#x2F;
+
+    &#x2F;**
+    A string template defining the contents of this TD column in the footer.  May include any set-based (i.e. &#x60;{sum}&#x60;,&#x60;{min}&#x60;,&#x60;{max}&#x60;,&#x60;{avg}&#x60;) or non-set related fields, including &#x60;{row_count}&#x60;, &#x60;{col_count}&#x60;, &#x60;{date}&#x60;,&#x60;{time}&#x60;.
+    &lt;br&#x2F;&gt;The {average} and {mean} placeholders are equivalent to {avg} in this implementation.
+
+    Example:
+
+        columns[2].content : &#x27;{sum}&#x27;
+
+    @attribute columns.content
+    @type String
+    @default null
+    **&#x2F;
+
+    &#x2F;**
+    A CSS class name to be added to this TD element of the footer
+    @attribute columns.className
+    @type String
+    @default null
+    **&#x2F;
+
+
+    &#x2F;**
+    Specifies a formatter to apply to the numeric field denoted in this TD column.  A formatter from the original DataTable columns can be specified.
+
+    If this attribute is set to null (or missing), the formatter from the DataTable column associated with the &quot;key&quot; (if any), will be used.
+
+    If this attribute is set to &#x27;&#x27;, no formatting will be applied.
+
+    @attribute columns.formatter
+    @type {String|Function}
+    @default null
+    **&#x2F;
+
+    &#x2F;**
+    Specifies a strftime format string to be applied for {date} entries, using Y.DataType.Date.format
+    @attribute dateFormat
+    @type String
+    @default &quot;%D&quot;
+    **&#x2F;
+
+    &#x2F;**
+    Specifies a strftime format string to be applied for {time} entries, using Y.DataType.Date.format
+    @attribute timeFormat
+    @type String
+    @default &quot;%T&quot;
+    **&#x2F;
+
+
   });
+
 
     </pre>
 </div>
