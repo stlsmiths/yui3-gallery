@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "Y.Calendar.JumpNavView",
         "Y.ContextMenuView",
         "Y.DataTable.CheckboxSelect",
         "Y.DataTable.Formatters",
@@ -8,7 +9,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Y.DataTable.Selection",
         "Y.FooterView",
         "Y.PaginatorModel",
-        "Y.PaginatorView"
+        "Y.PaginatorView",
+        "Y.Plugin.Calendar.JumpNav"
     ],
     "modules": [
         "DataTable",
